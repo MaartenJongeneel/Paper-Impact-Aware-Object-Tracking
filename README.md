@@ -1,7 +1,26 @@
+<h1 align="center">
+Model-Based 6D Visual Object Tracking with Impact Collision Models
+</h1>
+<div align="center">
+<h3>
+<a href="https://research.tue.nl/en/persons/maarten-jongeneel">Maarten Jongeneel</a>,
+<a href="http://users.isr.ist.utl.pt/~alex/pmwiki/index.php">Alexandre Bernardino</a>,
+<a href="https://www.tue.nl/en/research/researchers/nathan-van-de-wouw/">Nathan van de Wouw</a>,
+<a href="https://www.tue.nl/en/research/researchers/alessandro-saccon/">Alessandro Saccon</a>
+<br>
+<br>
+ACC: American Control Conference, 2022
+<br>
+<br>
+<a href="https://hal.archives-ouvertes.fr/hal-03170257">[Early Paper on HAL]</a>
+</h3>
+</div>
+
+
 Introduction
 ============
 
-The content of this repository is the result of the MSc thesis of Maarten Jongeneel on Model-Based Visual Object Tracking with Impact Collision Models. The objective for this thesis was to create an object tracking algorithm that is able to track rigid objects that make inpact with a surface, in particular focussing on logistics applications where boxes are being tossed on a surface. We show that conventional methods (Particle Filters (PF) with a Constant Velocity (CV) model) lose track of the box, as they cannot cope with the rapid changes in velocity imposed by impacts resulting from collisions between the box and the surface. We model the nonsmooth effects of impacts and friction in a motion model, and consider the state of the box to evolve in a Lie group. We present an object tracking algorithm, based on an Unscented Particle Filter, for systems whose state lives in a Lie group and incorporate this motion model. This results in the Geometric Unscented Particle Filter (GUPF) with a Nonsmooth (NS) motion model. We then track the 3D pose of the box by using its 2D projection onto synthetic images of a single RGB camera. 
+The content of this repository is associated to the paper "Model-Based 6D Visual Object Tracking with Impact Collision Models". The objective for this project was to create an object tracking algorithm that is able to track rigid objects that make inpact with a surface, in particular focussing on logistics applications where boxes are being tossed on a surface. We show that conventional methods (Particle Filters (PF) with a Constant Velocity (CV) model) lose track of the box, as they cannot cope with the rapid changes in velocity imposed by impacts resulting from collisions between the box and the surface. We model the nonsmooth effects of impacts and friction in a motion model, and consider the state of the box to evolve in a Lie group. We present an object tracking algorithm, based on an Unscented Particle Filter, for systems whose state lives in a Lie group and incorporate this motion model. This results in the Geometric Unscented Particle Filter (GUPF) with a Nonsmooth (NS) motion model. We then track the 6D pose of the box by using its 2D projection onto synthetic images of a single RGB camera. 
 
 Structure of this repo
 =====
