@@ -27,6 +27,7 @@ Table of content
 ================
 - [Overview](#overview)
 - [Installation](#Installation)
+- [Usage of the scripts](#Usage-of-the-scripts)
 
 # Overview
 There are two scenarios considered of a box being tossed on a platform. This data is stored in two differnt folders under ``static``. The data in these folders contains reference images of the box surfaces, the test-data, the box model, the ground truth data, and the camera intrinsic matrix. The ``Functions`` folder contains all the functions needed to run the four abovementioned scripts. The ``Results`` folder is used to store the simulation results.
@@ -44,8 +45,7 @@ Each of these scripts corresponds to a differnt type of algorithm. The abbreviat
 # Installation
 The code of this repository is all written in MATLAB and can directly be pulled from this repository. 
 
-Usage of the scripts
-====================
+# Usage of the scripts
 In each of the above mentioned scripts contains one can change the following settings:
 * Number of particles
 * Process noise and measurement noise covariance
