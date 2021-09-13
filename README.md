@@ -51,12 +51,18 @@ In the figure below, one can see a few examples of the **test-data**, which are 
 The object has six distinct collors, for each face one. Reference color-histograms are computed from the images below. This allows to track the orientation of the box, as in the *likelihood function* similarities are computed for each individual face (see Section IV-A of the paper).
 
 <div style = "display: flex;">
-<img src="static/config01/RefImages/Blue.png" alt="drawing" style = "width: 16.3%; padding:0.3%"/>
-<img src="static/config01/RefImages/Cyan.png" alt="drawing" style = "width: 16.3%; padding:0.3%"/>
-<img src="static/config01/RefImages/Green.png" alt="drawing" style = "width: 16.3%; padding:0.3%"/>
-<img src="static/config01/RefImages/Magenta.png" alt="drawing" style = "width: 16.3%; padding:0.3%"/>
-<img src="static/config01/RefImages/Red.png" alt="drawing" style = "width: 16.3%; padding:0.3%"/>
-<img src="static/config01/RefImages/Yellow.png" alt="drawing" style = "width: 16.3%; padding:0.3%"/>
+<div sytle = "flex: 16.3%; padding: 0.3%">
+<img src="static/config01/RefImages/Blue.png" alt="drawing"/> </div>
+<div sytle = "flex: 16.3%; padding: 0.3%">
+<img src="static/config01/RefImages/Cyan.png" alt="drawing"/> </div>
+<div sytle = "flex: 16.3%; padding: 0.3%">
+<img src="static/config01/RefImages/Green.png" alt="drawing"/></div>
+<div sytle = "flex: 16.3%; padding: 0.3%">
+<img src="static/config01/RefImages/Magenta.png" alt="drawing"/></div>
+<div sytle = "flex: 16.3%; padding: 0.3%">
+<img src="static/config01/RefImages/Red.png" alt="drawing"/></div>
+<div sytle = "flex: 16.3%; padding: 0.3%">
+<img src="static/config01/RefImages/Yellow.png" alt="drawing" /></div>
 </div>
 
 <p>&nbsp;</p>
