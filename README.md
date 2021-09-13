@@ -30,7 +30,16 @@ Table of content
 - [Usage of the scripts](#Usage-of-the-scripts)
 
 # Overview
-There are two scenarios considered of a box being tossed on a platform. This data is stored in two differnt folders under ``static``. The data in these folders contains reference images of the box surfaces, the test-data, the box model, the ground truth data, and the camera intrinsic matrix. The ``Functions`` folder contains all the functions needed to run the four abovementioned scripts. The ``Results`` folder is used to store the simulation results.
+There are two scenarios considered of a box being tossed on a platform, see the picture below. Both trajectories contain 65 poses (position/orientations) of the box, but the figures below show only the 1st and every 5th state of these trajectories. Note that in the first trajectory the motion of the object is parallel to the camera image, while in the second trajectory the object is moving towards the camera.
+
+![Single view predictions](images/Trajectories.png)
+
+
+This ground truth data of these trajecotires is stored in two different folders under ``static``. The data in these folders contains reference images of the box surfaces, the test-data, the box model, the ground truth data, and the camera intrinsic matrix. In the figure below, one can see a few examples of the test-data, which are the syntetic images used as input for the algorithms. In this specific case, we see the 1st, 30th and 65th frame of the first trajectory (as shown in the left image in the figure above). 
+
+![TestDataSamples](images/TestDataSamples.png)
+
+The ``Functions`` folder contains all the functions needed to run the four abovementioned scripts. The ``Results`` folder is used to store the simulation results.
 
 This repository contains four main scripts:
 
@@ -53,6 +62,8 @@ In each of the above mentioned scripts contains one can change the following set
 * Boolean deciding if you want to save the results to the ``Results`` folder
 
 Note that the two scenarios that are considered contain a box with a particular size, mass, inertia, face colors, and initial state. The settings in each of the scripts are set to match these parameters, as the assumption is made that for each of the tracking algorithms, these parameters are known. 
+
+
 
 
 
