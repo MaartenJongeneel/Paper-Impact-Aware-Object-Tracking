@@ -44,7 +44,7 @@ In the figure below, one can see a few examples of the **test-data**, which are 
 ![TestDataSamples](images/TestDataSamples.png)
 
 ### **Reference-images**
-The object has six distinct collors for each face. This allows to track the orientation of the box, as in the *likelihood function* similarities are computed for each individual face (see Section IV-A of the paper).
+The object has six distinct collors, for each face one. Reference color-histograms are computed from the images below. This allows to track the orientation of the box, as in the *likelihood function* similarities are computed for each individual face (see Section IV-A of the paper).
 
 <img src="static/config01/RefImages/Blue.png" alt="drawing" width="120"/>
 <img src="static/config01/RefImages/Cyan.png" alt="drawing" width="120"/>
@@ -53,6 +53,10 @@ The object has six distinct collors for each face. This allows to track the orie
 <img src="static/config01/RefImages/Red.png" alt="drawing" width="120"/>
 <img src="static/config01/RefImages/Yellow.png" alt="drawing" width="120"/>
 
+
+### **Box-model**
+The box model is defined in the script ``create_box_model.m``, where one is able to set the dimensions of the box. The geometric points used to compute the 
+![Box-model](images/Box-model.png)
 
 The ``Functions`` folder contains all the functions needed to run the four abovementioned scripts. The ``Results`` folder is used to store the simulation results.
 
