@@ -35,9 +35,24 @@ There are two scenarios considered of a box being tossed on a platform, see the 
 ![Single view predictions](images/Trajectories.png)
 
 
-This ground truth data of these trajecotires is stored in two different folders under ``static``. The data in these folders contains reference images of the box surfaces, the test-data, the box model, the ground truth data, and the camera intrinsic matrix. In the figure below, one can see a few examples of the test-data, which are the syntetic images used as input for the algorithms. In this specific case, we see the 1st, 30th and 65th frame of the first trajectory (as shown in the left image in the figure above). 
+This ground truth data of these trajecotires is stored in two different folders under ``static``. The data in these folders contains **reference images** of the box surfaces (distinct colors for each face), the **test-data** (synthetic RGB images), the **box model** (geometric model, containing mass/inertia properties), the **ground truth data** (position/orientation data), and the **camera intrinsic matrix**. 
+
+
+### **Test-data**
+In the figure below, one can see a few examples of the **test-data**, which are the syntetic images used as input for the algorithms. In this specific case, we see the 1st, 30th and 65th frame of the first trajectory (as shown in the left image in the figure above). 
 
 ![TestDataSamples](images/TestDataSamples.png)
+
+### **Reference-images**
+The object has six distinct collors for each face. This allows to track the orientation of the box, as in the *likelihood function* similarities are computed for each individual face (see Section IV-A of the paper).
+
+<img src="static/config01/RefImages/Blue.png" alt="drawing" width="120"/>
+<img src="static/config01/RefImages/Cyan.png" alt="drawing" width="120"/>
+<img src="static/config01/RefImages/Green.png" alt="drawing" width="120"/>
+<img src="static/config01/RefImages/Magenta.png" alt="drawing" width="120"/>
+<img src="static/config01/RefImages/Red.png" alt="drawing" width="120"/>
+<img src="static/config01/RefImages/Yellow.png" alt="drawing" width="120"/>
+
 
 The ``Functions`` folder contains all the functions needed to run the four abovementioned scripts. The ``Results`` folder is used to store the simulation results.
 
