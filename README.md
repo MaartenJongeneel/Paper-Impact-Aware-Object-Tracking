@@ -50,7 +50,7 @@ In the figure below, one can see a few examples of the **test-data**, which are 
 ### **Reference-images**
 The object has six distinct colors, for each face one. Reference color-histograms are computed from the images below, which for each trajectory are stored in the ``RefImages`` folder. This allows to track the orientation of the box, as in the *likelihood function* similarities are computed for each individual face (see Section IV-A of the paper).
 
-<div style = "display: flex;" align="center">
+<div style = "display: flex; align="center">
 <img src="static/config01/RefImages/Blue.png" alt="drawing" width=16%/> 
 <img src="static/config01/RefImages/Cyan.png" alt="drawing" width=16%/>
 <img src="static/config01/RefImages/Green.png" alt="drawing" width=16%/>
@@ -72,14 +72,6 @@ The camera intrinsic matrix used to create the synthetic images is stored in the
 <img src="images/KMatrix.png" width="30%"/> 
 </p>
 
-<div stye="position:absolute; width:100%; height:100%; margin-left:auto; margin-right:auto; display:block;">
-<img src="images/KMatrix.png" width="30%"/>
-</div>
-
-
-<div style="display:table-cell; vertical-align:middle; text-align:center">
-<img src="images/KMatrix.png" width="30%">
-</div>
 
 
 <p>&nbsp;</p>
