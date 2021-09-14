@@ -72,10 +72,6 @@ The camera intrinsic matrix used to create the synthetic images is stored in the
 <img src="images/KMatrix.png" width="30%"/> 
 </p>
 
-
-
-<p>&nbsp;</p>
-
 # Installation
 The code of this repository is all written in MATLAB and can directly be pulled from this repository. 
 
