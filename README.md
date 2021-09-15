@@ -26,9 +26,9 @@ The content of this repository is associated to the paper "Model-Based 6D Visual
 Table of content
 ================
 - [Overview](#overview)
-- [Installation](#Installation)
-- [Usage of the scripts](#Usage-of-the-scripts)
-- [Contact](#Contact)
+- [Installation](#installation)
+- [Usage of the scripts](#usage-of-the-scripts)
+- [Contact](#contact)
 
 # Overview
 There are two scenarios considered of a box being tossed on a platform, see the picture below. Both trajectories contain 65 poses (position/orientations) of the box, but the figures below show only the 1st and every 5th state of these trajectories. Note that in the first trajectory the motion of the object is parallel to the camera image, while in the second trajectory the object is moving towards the camera.
