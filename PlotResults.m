@@ -1,27 +1,29 @@
-close all; clearvars;
-addpath(genpath('static')); addpath('Functions'); 
+%% Plot the results to figures
+% This script is used to load the tracking result data and plot some nice
+% figures to illustrate the results. It also computes the errors with
+% respect to the ground truth data.
+%% General stuff
+close all; clearvars; addpath(genpath('static')); addpath('Functions'); 
 set(groot,'defaulttextinterpreter','latex'); set(groot,'defaultAxesTickLabelInterpreter','latex');  set(groot,'defaultLegendInterpreter','latex');
 %% Settings
-dosave = 0;
-createvideo = 0;
-impacts = [14 20 28 35 45]; %Frame at which an impact occurs
-ws     = 1;                  %Width of the contact surface   [m]
-ls     = 1;                  %Length of the contact surface  [m]
+dosave       = 0;                %Decide if you want to save the plots [-]
+createvideo  = 0;                %Decide if you want to make a video   [-]
+impacts      = [14 20 28 35 45]; %Frame at which an impact occurs      [-]
+ws           = 1;                %Width of the contact surface         [m]
+ls           = 1;                %Length of the contact surface        [m]
+configFolder = 'config02';       %The configuration that is used       [-]
 %% Plot results from simulation
-FileList = dir(fullfile('GUPF-NS/Test_data', '*.png')); %Load the data set
-load('K.mat');       %Camera intrinsic matrix
-load('GT.mat');      %Ground truth
-load('box.mat');
+FileList = dir(fullfile(append('static/',configFolder,'/Test_data'), '*.png')); %Load the data set
+load(append('static/',configFolder,'/K.mat'));       %Camera intrinsic matrix
+load(append('static/',configFolder,'/GT.mat'));      %Ground truth data
+load(append('static/',configFolder,'/box.mat'));     %Load the box struct 
 
-PF_CV = load('Results/PF_CV_P500F65_5.mat');
-PF_NS = load('Results/PF_NS_P500F65N4.mat');
-GUPF_NS = load('Results/GUPF_NS_P500F65N3.mat');
-% GUPFCV = load('GUPF-CV/Results/50P65FV5.mat');
+%Below, some examples are given for results 
+PF_CV = load(append('Results/',configFolder,'/PF_CV_P500F65_5.mat'));
+PF_NS = load(append('Results/',configFolder,'/PF_NS_P500F65N4.mat'));
+GUPF_NS = load(append('Results/',configFolder,'/GUPF_NS_P500F65N3.mat'));
 
 %% Constants
-Kz_K  = [0;0;1];            %z-component of the K frame
-Ky_K  = [0;1;0];            %y-component of the K frame
-Kx_K  = [1;0;0];            %x-component of the K frame
 s     = 1;                  %Size of the bouncing suraface     [m]
 theta = 90;                 %Rotation of the bouncing surface [deg]
 AR_K  = [1 0 0; 0 cos(deg2rad(theta)) -sin(deg2rad(theta)); 0 sin(deg2rad(theta)) cos(deg2rad(theta))];
@@ -29,18 +31,9 @@ Ao_K  = [0; 0.4; 1];
 surfacepoints = [0.5*ws -0.5*ws -0.5*ws 0.5*ws 0.5*ws; -0.5*ls -0.5*ls 0.5*ls 0.5*ls -0.5*ls; 0 0 0 0 0;];
 spoints = AR_K*surfacepoints +Ao_K;
 maxt = 65;
-plotYcuboid = 1;
-
-l     = box.dim(1);         %Length of the box
-w     = box.dim(2);         %Width of the box
-h     = box.dim(3);         %Height of the box
-%% Origin of the other frames wrt frame B
-Bo_C = [ l/2; -w/2; -h/2];      Bo_G = [ l/2; -w/2;  h/2];
-Bo_D = [-l/2; -w/2; -h/2];      Bo_H = [-l/2; -w/2;  h/2];
-Bo_E = [-l/2;  w/2; -h/2];      Bo_I = [-l/2;  w/2;  h/2];
-Bo_F = [ l/2;  w/2; -h/2];      Bo_J = [ l/2;  w/2;  h/2];
 
 %% Loading results
+%Load all the data and compute the erros
 Y{1} = PF_CV.PF_CV_Y;
 Y{2} = PF_NS.PF_NS_Y;
 Y{3} = GUPF_NS.GUPF_NS_Y;
@@ -70,8 +63,6 @@ GTR2(:,t) = GT{t}(1:3,2);        %Rotation around y of GT
 GTR3(:,t) = GT{t}(1:3,3);        %Rotation around z of GT
 end 
 
-
-
 for ii = 1:maxt
     %Compute the errors of each Y w.r.t. the ground truth
     EY{1}(:,ii) = GT{ii}(1:3,4)-q{1}(:,ii); 
@@ -90,6 +81,15 @@ end
 %% Plot figures
 close all 
 
+%Create a grid, plot figures at these xy coordinates
+px = [10 265 520 810 1065 1355 1540];
+py = [30 320 610 900]+15;
+for  ii = 1:length(px)
+    for jj = 1:length(py)
+        pp{jj,ii} = [px(ii) py(jj)];
+    end 
+end 
+
 ple = [1 2 3];
 p1 = AR_K*[ 1/2*2*s;  1/2*2*s; 0];
 p2 = AR_K*[ 1/2*2*s; -1/2*2*s; 0];
@@ -99,15 +99,6 @@ p4 = AR_K*[-1/2*2*s;  1/2*2*s; 0];
 xco = [p1(1) p2(1) p3(1) p4(1)]+Ao_K(1);
 yco = [p1(3) p2(3) p3(3) p4(3)]+Ao_K(3);
 zco = [p1(2) p2(2) p3(2) p4(2)]+Ao_K(2);
-
-%Plot figures at these xy coordinates
-px = [10 265 520 810 1065 1355 1540];
-py = [30 320 610 900]+15;
-for  ii = 1:length(px)
-    for jj = 1:length(py)
-        pp{jj,ii} = [px(ii) py(jj)];
-    end 
-end 
 
 RMS_PF_CV   = rms(NEY{ple(1)});
 RMS_PF_NS = rms(NEY{ple(2)});
@@ -124,7 +115,6 @@ R_EredPF_NS = (1-(R_RMS_PF_NS/R_RMS_PF_CV))*100;
 R_EredGUPF_NS = (1-(R_RMS_GUPF_NS/R_RMS_PF_CV))*100;
 
 %% ------------------------------- FIGURE 1 ------------------------------- %%
-
 traj = 3; %choose the trajectory to plot
 figure('rend','painters','pos',[pp{2,2} 250 200]); 
     ha = tight_subplot(1,1,[.08 .07],[.1 .03],[0.1 0.0]); %[gap_h gap_w] [low up ] [lft rght]
@@ -135,64 +125,27 @@ figure('rend','painters','pos',[pp{2,2} 250 200]);
     
     count = 1;
     frameplot = [1 6 12 18 24 30 36 42 48 54 60 65];
-    plot3(GTo(1,:),GTo(3,:),GTo(2,:),'color','k');  hold on;   %Plot GT trajectory
-    plot3(q{traj}(1,:),q{traj}(3,:),q{traj}(2,:),'color','b'); %Plot Y trajectory
+    colorGT = [0 0 0];
+    colorY  = [0 0 1];
+    plot3(GTo(1,:),GTo(3,:),GTo(2,:),'color',colorGT);  hold on;   %Plot GT trajectory
+    plot3(q{traj}(1,:),q{traj}(3,:),q{traj}(2,:),'color',colorY);  %Plot Y trajectory
  
     for ii=1:maxt
         if frameplot(count) == ii
         
         %Create the cuboid
-        AR_B = Y{traj}{1,ii};
-        Ao_B = Y{traj}{2,ii};
-        Ao_C = AR_B*Bo_C + Ao_B;
-        Ao_D = AR_B*Bo_D + Ao_B;
-        Ao_E = AR_B*Bo_E + Ao_B;
-        Ao_F = AR_B*Bo_F + Ao_B;
-        Ao_G = AR_B*Bo_G + Ao_B;
-        Ao_H = AR_B*Bo_H + Ao_B;
-        Ao_I = AR_B*Bo_I + Ao_B;
-        Ao_J = AR_B*Bo_J + Ao_B;
+        AH_B_Y = [Y{traj}{1,ii} Y{traj}{2,ii}; zeros(1,3),1];
+        AH_B_Y = [Rx(-90) zeros(3,1); zeros(1,3) 1]*AH_B_Y;
+        AH_B_Y(3,4) = -AH_B_Y(3,4);
+        plotBox(AH_B_Y,box,colorY,false);
+        hold on
         
-        %Plot the cuboid of Y
-        plot3([Ao_C(1) Ao_D(1)],[Ao_C(3) Ao_D(3)],[Ao_C(2) Ao_D(2)],'b');%
-        plot3([Ao_D(1) Ao_E(1)],[Ao_D(3) Ao_E(3)],[Ao_D(2) Ao_E(2)],'b');%
-        plot3([Ao_E(1) Ao_F(1)],[Ao_E(3) Ao_F(3)],[Ao_E(2) Ao_F(2)],'b');
-        plot3([Ao_F(1) Ao_C(1)],[Ao_F(3) Ao_C(3)],[Ao_F(2) Ao_C(2)],'b');
-        plot3([Ao_G(1) Ao_H(1)],[Ao_G(3) Ao_H(3)],[Ao_G(2) Ao_H(2)],'b');%
-        plot3([Ao_H(1) Ao_I(1)],[Ao_H(3) Ao_I(3)],[Ao_H(2) Ao_I(2)],'b');%
-        plot3([Ao_I(1) Ao_J(1)],[Ao_I(3) Ao_J(3)],[Ao_I(2) Ao_J(2)],'b');
-        plot3([Ao_J(1) Ao_G(1)],[Ao_J(3) Ao_G(3)],[Ao_J(2) Ao_G(2)],'b');
-        plot3([Ao_C(1) Ao_G(1)],[Ao_C(3) Ao_G(3)],[Ao_C(2) Ao_G(2)],'b');
-        plot3([Ao_D(1) Ao_H(1)],[Ao_D(3) Ao_H(3)],[Ao_D(2) Ao_H(2)],'b');
-        plot3([Ao_E(1) Ao_I(1)],[Ao_E(3) Ao_I(3)],[Ao_E(2) Ao_I(2)],'b');
-        plot3([Ao_F(1) Ao_J(1)],[Ao_F(3) Ao_J(3)],[Ao_F(2) Ao_J(2)],'b');
-        
-        %Create the cuboid of GT
-        AR_B = GT{ii}(1:3,1:3);
-        Ao_B = GT{ii}(1:3,4);
-        Ao_C = AR_B*Bo_C + Ao_B;
-        Ao_D = AR_B*Bo_D + Ao_B;
-        Ao_E = AR_B*Bo_E + Ao_B;
-        Ao_F = AR_B*Bo_F + Ao_B;
-        Ao_G = AR_B*Bo_G + Ao_B;
-        Ao_H = AR_B*Bo_H + Ao_B;
-        Ao_I = AR_B*Bo_I + Ao_B;
-        Ao_J = AR_B*Bo_J + Ao_B;
-        
-        %Plot the cuboid of Y
-        plot3([Ao_C(1) Ao_D(1)],[Ao_C(3) Ao_D(3)],[Ao_C(2) Ao_D(2)],'k');%
-        plot3([Ao_D(1) Ao_E(1)],[Ao_D(3) Ao_E(3)],[Ao_D(2) Ao_E(2)],'k');%
-        plot3([Ao_E(1) Ao_F(1)],[Ao_E(3) Ao_F(3)],[Ao_E(2) Ao_F(2)],'k');
-        plot3([Ao_F(1) Ao_C(1)],[Ao_F(3) Ao_C(3)],[Ao_F(2) Ao_C(2)],'k');
-        plot3([Ao_G(1) Ao_H(1)],[Ao_G(3) Ao_H(3)],[Ao_G(2) Ao_H(2)],'k');%
-        plot3([Ao_H(1) Ao_I(1)],[Ao_H(3) Ao_I(3)],[Ao_H(2) Ao_I(2)],'k');%
-        plot3([Ao_I(1) Ao_J(1)],[Ao_I(3) Ao_J(3)],[Ao_I(2) Ao_J(2)],'k');
-        plot3([Ao_J(1) Ao_G(1)],[Ao_J(3) Ao_G(3)],[Ao_J(2) Ao_G(2)],'k');
-        plot3([Ao_C(1) Ao_G(1)],[Ao_C(3) Ao_G(3)],[Ao_C(2) Ao_G(2)],'k');
-        plot3([Ao_D(1) Ao_H(1)],[Ao_D(3) Ao_H(3)],[Ao_D(2) Ao_H(2)],'k');
-        plot3([Ao_E(1) Ao_I(1)],[Ao_E(3) Ao_I(3)],[Ao_E(2) Ao_I(2)],'k');
-        plot3([Ao_F(1) Ao_J(1)],[Ao_F(3) Ao_J(3)],[Ao_F(2) Ao_J(2)],'k');
-        
+        %Create the cuboid
+        AH_B_GT = [GT{ii}(1:3,1:3) GT{ii}(1:3,4); zeros(1,3),1];
+        AH_B_GT = [Rx(-90) zeros(3,1); zeros(1,3) 1]*AH_B_GT;
+        AH_B_GT(3,4) = -AH_B_GT(3,4);
+        plotBox(AH_B_GT,box,colorGT,false);
+       
         count = count+1;
         end
     end
