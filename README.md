@@ -20,7 +20,7 @@ ACC: American Control Conference, 2022
 Introduction
 ============
 
-The content of this repository is associated to the paper "Model-Based 6D Visual Object Tracking with Impact Collision Models". The objective for this project was to create an object tracking algorithm that is able to track rigid objects that make inpact with a surface, in particular focussing on logistics applications where boxes are being tossed on a surface. We show that conventional methods (Particle Filters (PF) with a Constant Velocity (CV) model) lose track of the box, as they cannot cope with the rapid changes in velocity imposed by impacts resulting from collisions between the box and the surface. We model the nonsmooth effects of impacts and friction in a motion model, and consider the state of the box to evolve in a Lie group. We present an object tracking algorithm, based on an Unscented Particle Filter, for systems whose state lives in a Lie group and incorporate this motion model. This results in the Geometric Unscented Particle Filter (GUPF) with a Nonsmooth (NS) motion model. We then track the 6D pose of the box by using its 2D projection onto synthetic images of a single RGB camera. 
+The content of this repository is associated to the paper "Model-Based 6D Visual Object Tracking with Impact Collision Models". The objective for this project was to create an object tracking algorithm that is able to track rigid objects that make impact with a surface, in particular focussing on logistics applications where boxes are being tossed on a surface. We show that conventional methods (Particle Filters (PF) with a Constant Velocity (CV) model) lose track of the box, as they cannot cope with the rapid changes in velocity imposed by impacts resulting from collisions between the box and the surface. We model the nonsmooth effects of impacts and friction in a motion model, and consider the state of the box to evolve in a Lie group. We present an object tracking algorithm, based on an Unscented Particle Filter, for systems whose state lives in a Lie group and incorporate this motion model. This results in the Geometric Unscented Particle Filter (GUPF) with a Nonsmooth (NS) motion model. We then track the 6D pose of the box by using its 2D projection onto synthetic images of a single RGB camera. 
 
 
 Table of content
@@ -36,12 +36,14 @@ There are two scenarios considered of a box being tossed on a platform, see the 
 ![Single view predictions](images/Trajectories.png)
 
 
-This ground truth data of these trajecotires is stored at ``GT.mat`` in two different folders (for each trajectory one) under ``static``. Furthermore, the content in the ``static`` folder contains **reference images** of the box surfaces (distinct colors for each face), the **test-data** (synthetic RGB images), the **box model** (geometric model, containing mass/inertia properties), and the **camera intrinsic matrix**. 
+This ground truth data of these trajectories is stored at ``GT.mat`` in two different folders (for each trajectory one) under ``static``. Furthermore, the content in the ``static`` folder contains **reference images** of the box surfaces (distinct colors for each face), the **test-data** (synthetic RGB images), the **box model** (geometric model, containing mass/inertia properties), and the **camera intrinsic matrix**. 
+
+One can also create a new trajectory with associated synthetic images, more on this can be found in section [Usage of the scripts](#usage-of-the-scripts). 
 
 <p>&nbsp;</p>
 
 ### **Test-data**
-In the figure below, one can see a few examples of the **test-data**, which are the syntetic images used as input for the algorithms, stored in the ``Test_data`` folder of each trajectory. In the specific case of the figure below, we see the 1st, 30th and 65th frame of the first trajectory (as shown in the left image in the figure above). 
+In the figure below, one can see a few examples of the **test-data**, which are the synthetic images used as input for the algorithms, stored in the ``Test_data`` folder of each trajectory. In the specific case of the figure below, we see the 1st, 30th and 65th frame of the first trajectory (as shown in the left image in the figure above). 
 
 ![TestDataSamples](images/TestDataSamples.png)
 
@@ -76,6 +78,7 @@ The camera intrinsic matrix used to create the synthetic images is stored in the
 The code of this repository is all written in MATLAB and can directly be pulled from this repository. 
 
 # Usage of the scripts
+## Main functions
 This repository contains four main scripts:
 
 * ``GUPF_CV.m``
@@ -113,8 +116,57 @@ kappa    = 0.5;      %UKF : sigma point selection scaling parameter
 
 Note that the two scenarios that are considered contain a box with a particular size, mass, inertia, face colors, and initial state. The settings in each of the scripts are set to match these parameters, as the assumption is made that for each of the tracking algorithms, these parameters are known. In the near future we will add the code that was used to create trajectories and corresponding synthetic images. 
 
+## Additional scripts
+There are two additional scripts which are
+
+* ``CreateSyntheticImages.m``
+* ``PlotResults.m``
+
+The scripts ``CreateSyntheticImages.m`` is used to create a new trajectory of the box and create the associated synthetic images. In the script, one is able to set various parameters of the box (such as the Coefficient of Normal/Tangential restitution, Coefficient of friction, mass, dimensions, release pose and velocity) as well as the settings for the synthetic images (frame rate of the camera, camera intrinsic matrix). USing the settings given as (as example)
+```matlab
+doPlot       = true;              %Decide if we want to plot the box     [-]
+createvideo  = true;              %Decide if we want to create a video   [-]
+configFolder = 'static/config03'; %Config folder where images are stored [-]
+```
+one can decide to plot the box (to see a 3D view of the created trajectory), create a video of the resulting trajectory (as seen from the camera), and the configuration folder name to where the synthetic images (and associated data) is stored. By running the script, a configuration folder will be created (with the chosen name), where the following data is stored:
+
+| Name        | Functionality  |
+| ----------- | -------------- |
+| ``box.mat`` | Something Else |
+| ``something`` | Does this work? |
+| ``K.mat``   | Camera intrinsic matrix |
+
+<div align="center">
+
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Functionality</th>
+  </tr>
+  <tr>
+    <td>Test_data</td>
+    <td>Folder containing the synthetic images</td>
+  </tr>
+  <tr>
+    <td style="color: orange;">box.mat</td>
+    <td>Struct containing the properties of the boxs</td>
+  </tr>
+  <tr>
+    <td style="color: orange;">GT.mat</td>
+    <td>Cell array containing the ground truth poses of the trajectory</td>
+  </tr>
+  <tr>
+    <td style="color: orange;">K.mat</td>
+    <td>Matrix (double) containing the camera intrinsic matrix</td>
+  </tr>
+  </table>
+
+</div>
+
+
 # Contact
-In case you have questions or if you encountered an error, please contact us through the "Issues" functionallity on GIT. 
+In case you have questions or if you encountered an error, please contact us through the "Issues" functionality on GIT. 
 
 
 
