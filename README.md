@@ -130,15 +130,7 @@ configFolder = 'static/config03'; %Config folder where images are stored [-]
 ```
 one can decide to plot the box (to see a 3D view of the created trajectory), create a video of the resulting trajectory (as seen from the camera), and the configuration folder name to where the synthetic images (and associated data) is stored. By running the script, a configuration folder will be created (with the chosen name), where the following data is stored:
 
-| Name        | Functionality  |
-| ----------- | -------------- |
-| ``box.mat`` | Something Else |
-| ``something`` | Does this work? |
-| ``K.mat``   | Camera intrinsic matrix |
-
 <div align="center">
-
-
 <table>
   <tr>
     <th>Name</th>
@@ -150,7 +142,7 @@ one can decide to plot the box (to see a 3D view of the created trajectory), cre
   </tr>
   <tr>
     <td style="color: orange;">box.mat</td>
-    <td>Struct containing the properties of the boxs</td>
+    <td>Struct containing the properties of the box</td>
   </tr>
   <tr>
     <td style="color: orange;">GT.mat</td>
@@ -161,8 +153,11 @@ one can decide to plot the box (to see a 3D view of the created trajectory), cre
     <td>Matrix (double) containing the camera intrinsic matrix</td>
   </tr>
   </table>
-
 </div>
+
+With this data, one is able to test the tracking algorithm on any chosen trajectory and compare the tracking results with the ground truth data.
+
+The second script that is provided is the ``PlotResults.m`` script, which takes the resulting tracking data and creates nice figures to display the results. 
 
 
 # Contact
