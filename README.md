@@ -16,6 +16,17 @@ ACC: American Control Conference, 2022
 </h3>
 </div>
 
+If you are using this paper as reference, please refer to it as
+```bibtex
+@inproceedings{Jongeneel2022,
+    author = {M.J. Jongeneel and A. Bernardino and N. van de Wouw and A. Saccon},
+    title = {{Model-Based 6D Visual Object Tracking with Impact Collision Models}},
+    booktitle = {{IEEE American Control Conference (ACC)}},
+    year = {2022},
+    month = {June}
+}
+```
+
 
 Introduction
 ============
