@@ -12,10 +12,24 @@ Model-Based 6D Visual Object Tracking with Impact Collision Models
 ACC: American Control Conference, 2022
 <br>
 <br>
-<a href="https://hal.archives-ouvertes.fr/hal-03170257">[Early Paper on HAL]</a>
+<a href="https://ieeexplore.ieee.org/document/9867622">[Published paper on IEEE]</a>
+<br>
+<a href="https://hal.archives-ouvertes.fr/hal-03170257">[Published Paper on HAL]</a>
 </h3>
 </div>
 
+If you are using this paper as reference, please refer to it as
+```bibtex
+@inproceedings{Jongeneel2022_ModelBased,
+    author = {M J Jongeneel and A Bernardino and N van de Wouw and A Saccon},
+    title = {{Model-Based 6D Visual Object Tracking with Impact Collision Models}},
+    booktitle = {{IEEE American Control Conference (ACC)}},
+    year = {2022},
+    month = {June},
+    pages = {3850-3856},
+    doi = {https://ieeexplore.ieee.org/document/9867622}
+}
+```
 
 Introduction
 ============
