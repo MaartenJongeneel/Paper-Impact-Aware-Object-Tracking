@@ -14,7 +14,10 @@ ACC: American Control Conference, 2022
 <br>
 <a href="https://ieeexplore.ieee.org/document/9867622">[Published paper on IEEE]</a>
 <br>
+<br>
 <a href="https://hal.archives-ouvertes.fr/hal-03170257">[Published Paper on HAL]</a>
+<br>
+<br>
 </h3>
 </div>
 
