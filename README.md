@@ -1,3 +1,4 @@
+<div align="center">
 <h1 align="center">
 Model-Based 6D Visual Object Tracking with Impact Collision Models
 </h1>
