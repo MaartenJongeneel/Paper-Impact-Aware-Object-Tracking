@@ -2,7 +2,6 @@
 <h1 align="center">
 Model-Based 6D Visual Object Tracking with Impact Collision Models
 </h1>
-<div align="center">
 <h3>
 <a href="https://research.tue.nl/en/persons/maarten-jongeneel">Maarten Jongeneel</a>,
 <a href="http://users.isr.ist.utl.pt/~alex/pmwiki/index.php">Alexandre Bernardino</a>,
