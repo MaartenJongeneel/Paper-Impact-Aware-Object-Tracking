@@ -30,7 +30,7 @@ If you are using this paper as reference, please refer to it as
     year = {2022},
     month = {June},
     pages = {3850-3856},
-    doi = {https://ieeexplore.ieee.org/document/9867622}
+    doi = {10.23919/ACC53348.2022.9867622}
 }
 ```
 
