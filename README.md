@@ -88,7 +88,9 @@ The box model is defined in the file ``box.mat``, which is created by the script
 ### **Camera intrinsic matrix**
 The camera intrinsic matrix used to create the synthetic images is stored in the file ``K.mat`` and is given by
 <p align="center">
-<img src="images/KMatrix.png" width="30%"/> 
+  <div style = "display: flex; align="center">
+  <img src="images/KMatrix.png" width="30%"/> 
+  </div>
 </p>
 
 # Installation
